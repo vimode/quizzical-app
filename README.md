@@ -16,13 +16,13 @@ Objectives of the Project
 
 ## Experience, Learning and Notes
 
-## TODO
+This section will be updated periodically.
 
-- [] Add an app diagram
+### Todo
 
-- [] Add figma link and/or desktop screenshot
-
-- [] Add favicon
+- [ ] Add an app diagram
+- [ ] Add figma link and/or desktop screenshot
+- [ ] Add favicon
 
 ## Installation
 
