@@ -6,7 +6,7 @@ _This is a working in progress, README will be updated periodically_
 
 ## Overview
 
-Build a Trivia App using React using the [OpenTriviaDatabase API](https://opentdb.com/) based on the provided Figma design.
+Build a Trivia App with React using the [OpenTriviaDatabase API](https://opentdb.com/) based on the provided Figma design.
 
 Objectives of the Project
 
@@ -16,7 +16,42 @@ Objectives of the Project
 
 ## Experience, Learning and Notes
 
-This section will be updated periodically.
+_This section will be updated periodically._
+
+_currently being used as data/knowledge/resource dump while building the app_
+https://opentdb.com/api.php?amount=5&encode=base64
+https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64
+
+// const uri = `https://opentdb.com/api.php?amount=5&category=${category}&difficulty={level}&type=multiple&encode=base64`
+
+// categories
+// general knowledge = 9  
+// books = 10
+// films = 11
+// music = 12  
+// musicals and theatre = 13
+// television = 14
+// video games = 15
+// board games = 16
+// science and nature = 17
+// science computers = 18
+// mathematic = 19
+// mytholog = 20
+// sports = 21
+// geography =22
+// history = 23
+// politics = 24
+// art = 25
+// celebrities = 26
+// animals = 27
+// vehicles = 28
+// comics = 29
+// science gadgets = 30
+// japanese anime and manga = 31
+// cartoons and animations = 32
+
+//difficulty
+//easy medium hard
 
 ### Todo
 
@@ -53,5 +88,7 @@ npm run preview
 ## Resources
 
 OTDB API - https://opentdb.com/api_config.php
+
+Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
 
 ViteJS - https://vitejs.dev/guide/#scaffolding-your-first-vite-project
