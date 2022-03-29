@@ -19,6 +19,7 @@ Objectives of the Project
 _This section will be updated periodically._
 
 _currently being used as data/knowledge/resource dump while building the app_
+
 https://opentdb.com/api.php?amount=5&encode=base64
 https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64
 
@@ -69,7 +70,7 @@ npm install
 npm run dev
 ```
 
-And then open http://localhost:3000 to view it in the browser
+Open http://localhost:3000 to view it in the browser
 
 **Available Scripts**
 
@@ -88,6 +89,8 @@ npm run preview
 ## Resources
 
 OTDB API - https://opentdb.com/api_config.php
+
+Nano ID - https://github.com/ai/nanoid
 
 Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
 
