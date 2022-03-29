@@ -1,4 +1,7 @@
 import React from 'react'
+
+import { nanoid } from 'nanoid';
+import styled from 'styled-components';
 import './App.css'
 
 // 
@@ -65,15 +68,61 @@ import './App.css'
 // reset f() - reset the state, reset the score, reset the fetch URI show start page again
 
 
+function dataSplit(encodedData) {
+  let decodedData = []
+  
+  encodedData.map((questionObj, index) => {
+    decodedData.push(
+    { 
+      id : nanoid(),
+      question : atob(questionObj.question),
+      correct_answer : atob(questionObj.correct_answer),
+      incorrect_answers : questionObj.incorrect_answers.map((option) => 
+        atob(option)
+      )
+    })
+    // loading state false
+  })
+  
+  console.log(decodedData)
+}
 
+async function fetchQuizData () {
 
+  const fetchURI = "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64"
+  
+  const response = await fetch(fetchURI);
+  // loading state true
+  try {
+    const quizData = await response.json()
+    dataSplit(quizData.results)
+  } catch(e) {
+    console.log(`Error ${response.status}`)
+  }
+}
+
+// fetchQuizData()
+
+const Wrapper = styled.section `
+padding: 4em;
+background: papayawhip;
+height: 100vh;
+`;
+
+const Title = styled.h1 `
+font-size: 1.5em;
+text-align: center;
+color: palevioletred;
+`;
 
 function App() {
 
   return (
-    <div className="App">
-       <p>Hello!</p>
-    </div>
+    <Wrapper>
+      <Title>
+        Quizzical App
+      </Title>
+    </Wrapper>
   )
 }
 
