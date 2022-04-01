@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
-import './App.css'
+
+// COMPONENTS
+
+// STYLES
+import { GlobalStyle } from './GlobalStyle';
+
 
 // 
 //
@@ -68,61 +73,120 @@ import './App.css'
 // reset f() - reset the state, reset the score, reset the fetch URI show start page again
 
 
-function dataSplit(encodedData) {
-  let decodedData = []
+function Quiz ({quizData}) {
   
-  encodedData.map((questionObj, index) => {
-    decodedData.push(
-    { 
-      id : nanoid(),
-      question : atob(questionObj.question),
-      correct_answer : atob(questionObj.correct_answer),
-      incorrect_answers : questionObj.incorrect_answers.map((option) => 
-        atob(option)
-      )
-    })
-    // loading state false
-  })
-  
-  console.log(decodedData)
+  return (
+    <>
+    <ul>
+    {quizData && quizData.map((quizItem,index) => 
+    // create a question component
+      <li
+      key ={quizItem.id}
+      >
+        <p>{quizItem.question}</p>
+        {quizItem.answer_options.map((option) => 
+          <div
+          key = {option}>
+            <input type="radio" name={quizItem.id} id={option} value = {option} />
+            <label htmlFor={option}>{option}</label>
+        </div>
+        )}        
+      </li>
+    )}
+
+    </ul>
+    <button>Check answers</button>
+    </>
+    
+  )
 }
 
-async function fetchQuizData () {
-
-  const fetchURI = "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64"
-  
-  const response = await fetch(fetchURI);
-  // loading state true
-  try {
-    const quizData = await response.json()
-    dataSplit(quizData.results)
-  } catch(e) {
-    console.log(`Error ${response.status}`)
-  }
-}
-
-// fetchQuizData()
-
-const Wrapper = styled.section `
+const Wrapper = styled.section`
 padding: 4em;
-background: papayawhip;
+background: var(--clr - body - bg);
 height: 100vh;
 `;
 
-const Title = styled.h1 `
-font-size: 1.5em;
-text-align: center;
-color: palevioletred;
+const Title = styled.h1`
+font - size: 1.5em;
+text - align: center;
 `;
 
 function App() {
 
+  const [quizData, setQuizData] = useState('');
+  const [quizStart, setQuizStart] = useState(false)
+  // state : loader
+
+
+  function dataSplit(encodedData) {
+    let decodedData = []
+    
+    encodedData.map((questionObj, index) => {
+      
+      let combined_options = [...questionObj.incorrect_answers, questionObj.correct_answer]
+      
+      decodedData.push(
+      { 
+        id : nanoid(),
+        question : atob(questionObj.question),
+        correct_answer : atob(questionObj.correct_answer),
+        answer_options : combined_options.sort().map((option) => 
+          atob(option)
+        )
+      })
+      setQuizData(decodedData)
+      // loader false
+    })
+    
+  }
+  
+
+  async function fetchQuizData () {
+  
+    const fetchURI = "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64"
+    
+    const response = await fetch(fetchURI);
+    // loader true
+    try {
+      const quizData = await response.json()
+      dataSplit(quizData.results)
+    } catch(e) {
+      console.log(`Error ${response.status}`)
+    }
+  }
+
+  function loadQuiz () {
+    setQuizStart(true)
+  }
+
+  useEffect(()=> {
+    if(quizStart) {
+      fetchQuizData()
+    }
+  }, [quizStart])
+
+
   return (
+    <>
     <Wrapper>
-      <Title>
-        Quizzical App
-      </Title>
+      {!quizData  ? 
+        ( <>
+          <Title>
+            Quizzical App
+          </Title>
+          <p>Description</p>
+          <button
+            onClick = {loadQuiz}
+          >Start Quiz</button> </> )
+          :  <Quiz  
+            quizData = {quizData}
+          /> }
+
+           {/* loader when fetching data */}
     </Wrapper>
+    <GlobalStyle/>
+    </>
   )
 }
 
