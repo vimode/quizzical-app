@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 
+import Quiz from "./Quiz"
+
 // COMPONENTS
 
 // STYLES
@@ -73,33 +75,6 @@ import { GlobalStyle } from './GlobalStyle';
 // reset f() - reset the state, reset the score, reset the fetch URI show start page again
 
 
-function Quiz ({quizData}) {
-  
-  return (
-    <>
-    <ul>
-    {quizData && quizData.map((quizItem,index) => 
-    // create a question component
-      <li
-      key ={quizItem.id}
-      >
-        <p>{quizItem.question}</p>
-        {quizItem.answer_options.map((option) => 
-          <div
-          key = {option}>
-            <input type="radio" name={quizItem.id} id={option} value = {option} />
-            <label htmlFor={option}>{option}</label>
-        </div>
-        )}        
-      </li>
-    )}
-
-    </ul>
-    <button>Check answers</button>
-    </>
-    
-  )
-}
 
 const Wrapper = styled.section`
 padding: 4em;
@@ -114,20 +89,24 @@ text - align: center;
 
 function App() {
 
+  // THE DECODED QUESTION DATA
   const [quizData, setQuizData] = useState('');
-  const [quizStart, setQuizStart] = useState(false)
-  // state : loader
+  
+  // START TO BEING FETCHING DATA FROM THE API
+  const [quizStart, setQuizStart] = useState(true);
+  
+  // TODO : LOADER TO SHOW WHILE DATA IS BEING FETCHED
 
 
   function dataSplit(encodedData) {
+    
     let decodedData = []
     
     encodedData.map((questionObj, index) => {
       
       let combined_options = [...questionObj.incorrect_answers, questionObj.correct_answer]
       
-      decodedData.push(
-      { 
+      decodedData.push({
         id : nanoid(),
         question : atob(questionObj.question),
         correct_answer : atob(questionObj.correct_answer),
@@ -135,16 +114,16 @@ function App() {
           atob(option)
         )
       })
-      setQuizData(decodedData)
-      // loader false
+      return decodedData;
     })
-    
+    setQuizData(decodedData)
+    // loader false
   }
   
 
   async function fetchQuizData () {
   
-    const fetchURI = "https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple&encode=base64"
+    const fetchURI = "https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple&encode=base64"
     
     const response = await fetch(fetchURI);
     // loader true
@@ -170,19 +149,12 @@ function App() {
   return (
     <>
     <Wrapper>
-      {!quizData  ? 
+      {!quizStart  ? 
         ( <>
-          <Title>
-            Quizzical App
-          </Title>
-          <p>Description</p>
-          <button
-            onClick = {loadQuiz}
-          >Start Quiz</button> </> )
-          :  <Quiz  
-            quizData = {quizData}
-          /> }
-
+          <Title>Quizzical App</Title>
+          <p>In each quiz you'll be given five random quesitons to answer. Press the button below to play and see how many you can answer correctly! </p>
+          <button onClick = {loadQuiz}>Start Quiz</button> </> )
+        :  <Quiz quizData = {quizData}/> }
            {/* loader when fetching data */}
     </Wrapper>
     <GlobalStyle/>
