@@ -31,11 +31,23 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: var(--ff-primary);
     color: var(--clr-primary-text);
+    background-color: var(--clr-body-bg);
   }
 
   .btn, button, input {
-    font: inherit;
+    font-family: var(--ff-secondary);
+    cursor: pointer;
   }
 
+  button {
+    padding: 10px 30px;
+    font-weight: var(--fw-med);
+    width: max-content;
+    border-radius: 10px;
+    background-color: var(--clr-button-bg);
+    border: none;
+    color: var(--clr-button-text);
+    transition: all linear 300ms;
+  }
 
-`;
+  `
