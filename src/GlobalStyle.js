@@ -32,6 +32,8 @@ export const GlobalStyle = createGlobalStyle`
     font-family: var(--ff-primary);
     color: var(--clr-primary-text);
     background-color: var(--clr-body-bg);
+    min-height: 100vh;
+    min-width: 100vw;
   }
 
   .btn, button, input {
@@ -48,6 +50,13 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     color: var(--clr-button-text);
     transition: all linear 300ms;
+  }
+
+  #root {
+    display: flex;
+    height: 100vh;
+    place-items: center;
+    place-content: center;
   }
 
   `
