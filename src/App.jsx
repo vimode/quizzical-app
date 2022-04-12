@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 
 // packages
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 // Components
 import Quiz from "./components/Quiz"
 
-// GlobalStyle
-import { GlobalStyle } from './GlobalStyle';
 
 const Wrapper = styled.section`
   padding: 4em 8em;
@@ -20,6 +18,7 @@ const Wrapper = styled.section`
   place-content: center;
   place-items: center;
   gap: 1.5em;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -32,16 +31,44 @@ const Content = styled.p`
   text-align: center;
   font-family: var(--ff-secondary);
   font-weight: var(--fw-reg);
-`
+`;
 
-const TestButton = styled.button `
+const StartButton = styled.button `
 
     &:hover,
     &:focus {
       background-color: var(--clr-highlight-secondary);
       color: var(--clr-button-bg);
     }
-`
+`;
+
+    const rotate = keyframes` 
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+`;
+
+const Loader = styled.div `
+    display:block;
+    width: 100px;
+    height: 100px;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 5px solid var(--clr-highlight-secondary);
+      border-color: var(--clr-highlight-secondary) transparent var(--clr-highlight-secondary) transparent;
+      animation: ${rotate} 1.5s linear infinite;
+    }
+`;
+
+
 
 function App() {
 
@@ -51,7 +78,8 @@ function App() {
   // toStart fetching data
   const [quizStart, setQuizStart] = useState(false);
   
-  // TODO : A loader while data is being fetched.
+  // A loading icon while data is being fetched.
+  const [isLoading, setIsLoading] = useState(false)
 
 
   function dataSplit(encodedData) {
@@ -73,16 +101,17 @@ function App() {
       return decodedData;
     })
     setQuizData(decodedData)
-    // loader false
+    setIsLoading(false)
   }
   
 
   async function fetchQuizData () {
-  
+    
+    setIsLoading(true)
+
     const fetchURI = "https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple&encode=base64"
     
     const response = await fetch(fetchURI);
-    // loader true
     try {
       const quizData = await response.json()
       dataSplit(quizData.results)
@@ -95,6 +124,11 @@ function App() {
     setQuizStart(true)
   }
 
+  function resetStart() {
+    setQuizStart(false)
+    setQuizData('')
+  }
+
   useEffect(()=> {
     if(quizStart) {
       fetchQuizData()
@@ -104,15 +138,15 @@ function App() {
 
   return (
     <>
-      <GlobalStyle/>
     <Wrapper>
-      {!quizStart  ? 
+      
+      {!isLoading && !quizStart  ? 
         ( <>
           <Title>Quizzical App</Title>
           <Content>In each quiz you'll be given five random quesitons to answer. Press the button below to play and see how many you can answer correctly! </Content>
-          <TestButton onClick = {loadQuiz}>Start Quiz</TestButton> </> )
-        :  <Quiz quizData = {quizData}/> }
-           {/* loader when fetching data */}
+          <StartButton onClick = {loadQuiz}>Start Quiz</StartButton> </> ) 
+          :  isLoading && quizData.length < 4 ? (<Loader/>) 
+        : !isLoading && quizData ? (<Quiz quizData = {quizData} resetStart= {resetStart}/>) : <></> }
     </Wrapper>
     </>
   )
