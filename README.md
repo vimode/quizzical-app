@@ -2,7 +2,7 @@
 
 This is the solo project for Scrimba Module 11.4
 
-_This is a working in progress, README will be updated periodically_
+_This is a WIP project, README will be updated periodically_
 
 ## Overview
 
@@ -16,7 +16,7 @@ Objectives of the Project
 
 ## Experience, Learning and Notes
 
-_currently being used as data/knowledge/resource dump while building the app_
+_readme is currently being used as data/knowledge/resource dump while building the app_
 
 ```bash
 https://opentdb.com/api.php?amount=5&encode=base64
