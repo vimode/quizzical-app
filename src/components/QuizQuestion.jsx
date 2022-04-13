@@ -74,7 +74,7 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
     } else {
      radioClass = 'itemIncorrect'
     }
-    console.log(radioClass)
+    // console.log(radioClass)
 
 
   return (
