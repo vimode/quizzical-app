@@ -66,10 +66,12 @@ SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submi
 - [ ] Add figma link and/or desktop screenshot
 - [ ] Add favicon
 - [ ] onSubmit highlight selected option as correct or incorrect accordinglly
+- [ ] Disable options/radio buttons on submit
 - [ ] Media Queries
 - [ ] Style radio buttons and conditionally render label colors
 - [ ] Fix loading icon appearly late
-- [ ] Add other options at start of the quiz.
+- [ ] Add other options(categories and difficulty) at start screen.
+- [ ] Should the user be allowed to check without selecting any option? or just show correct answers even if nothing is selected on submit?
 
 ## Installation
 
