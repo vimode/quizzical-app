@@ -60,18 +60,38 @@ Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
 
 SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter // possibly a fix for handling two buttons/two seperate functions in one on onSubmit
 
-### Todo
+## Todo
 
-- [ ] Add an app diagram
-- [ ] Add figma link and/or desktop screenshot
-- [ ] Add favicon
+### Basic
+
+- [x] Basic functionalty to fetch encoded data, decode it and save a new state object
+- [x] Quiz and quizQ logic for each Q to have indepedent state
+  - [x] Only check answers onSubmit
+  - [x] Reset quiz to start over (go to start screen)
+- [x] Seperate quiz and quizQ components
 - [ ] onSubmit highlight selected option as correct or incorrect accordinglly
 - [ ] Disable options/radio buttons on submit
-- [ ] Media Queries
 - [ ] Style radio buttons and conditionally render label colors
-- [ ] Fix loading icon appearly late
+
+### Styling
+
+- [x] Initiate and establish Styled components
+- [ ] Media Queries
+- [ ] Conditional styling of radio buttons
+
+### Extra
+
+- [ ] Fix loading icon appearing late
 - [ ] Add other options(categories and difficulty) at start screen.
+- [ ] Add a random quiz option which pulls random questions at random difficulty and has tags/labels for each question to show the category.
 - [ ] Should the user be allowed to check without selecting any option? or just show correct answers even if nothing is selected on submit?
+
+### Repo
+
+- [ ] Add an app diagram
+- [ ] Add figma link and/or desktop screenshot - [ ] Add favicon
+
+````
 
 ## Installation
 
@@ -81,7 +101,7 @@ Clone the repo
 cd quizzical-app
 npm install
 npm run dev
-```
+````
 
 Open http://localhost:3000 to view it in the browser
 
