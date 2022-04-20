@@ -60,24 +60,24 @@ Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
 
 SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter // possibly a fix for handling two buttons/two seperate functions in one on onSubmit
 
-## Todo
+## TODO
 
 ### Basic
 
 - [x] Basic functionalty to fetch encoded data, decode it and save a new state object
-- [x] Quiz and quizQ logic for each Q to have indepedent state
+- [x] Quiz and quizQ logic for each Q to have independent state
   - [x] Only check answers onSubmit
   - [x] Reset quiz to start over (go to start screen)
 - [x] Seperate quiz and quizQ components
-- [ ] onSubmit highlight selected option as correct or incorrect accordinglly
-- [ ] Disable options/radio buttons on submit
-- [ ] Style radio buttons and conditionally render label colors
+- [x] onSubmit highlight selected option as correct or incorrect accordinglly
+- [x] Disable options/radio buttons on submit
+- [x] Style radio buttons and conditionally render label colors
 
 ### Styling
 
 - [x] Initiate and establish Styled components
 - [ ] Media Queries
-- [ ] Conditional styling of radio buttons
+- [x] Conditional styling of radio buttons
 
 ### Extra
 
@@ -89,7 +89,8 @@ SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submi
 ### Repo
 
 - [ ] Add an app diagram
-- [ ] Add figma link and/or desktop screenshot - [ ] Add favicon
+- [ ] Add figma link and/or desktop screenshot
+- [ ] Add favicon
 
 ````
 
