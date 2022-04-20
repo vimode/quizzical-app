@@ -1,34 +1,10 @@
 import React, {useState, useReducer} from "react";
 
-// packages
-import styled from 'styled-components';
-
 // components
 import QuizQuestion from "./QuizQuestion";
 
 //styled components
-
-const QuizLayout = styled.form`
-  display:flex;
-  flex-direction: column;
-  place-items: center;
-  place-content: center;
-  height: 100%;
-`
-
-const Content = styled.p` 
-  padding: 1em;
-`
-
-const QuizButton = styled.button `
-    &:hover,
-    &:focus {
-      background-color: var(--clr-highlight-primary);
-      color: var(--clr-button-bg);
-      border: 1px solid var(--clr-button-bg);
-    }
-`
-
+import { QuizLayout, Content, QuizButton } from './Quiz.styles.js';
 
 function Quiz ({quizData,resetStart}) {
 
@@ -60,7 +36,7 @@ function Quiz ({quizData,resetStart}) {
   }
 
   //populate selected answers from radio buttons in any order
-  function updateSelection(event, status, index) {
+  function updateSelection(event) {
     const {value, name} = event.target;
     setSelectedAnswers({
       ...selectedAnswers,
