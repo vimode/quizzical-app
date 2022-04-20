@@ -20,6 +20,15 @@ const Content = styled.p`
   padding: 1em;
 `
 
+const QuizButton = styled.button `
+    &:hover,
+    &:focus {
+      background-color: var(--clr-highlight-primary);
+      color: var(--clr-button-bg);
+      border: 1px solid var(--clr-button-bg);
+    }
+`
+
 
 function Quiz ({quizData,resetStart}) {
 
@@ -81,10 +90,10 @@ function Quiz ({quizData,resetStart}) {
           />
         )}
 
-        {currentScore ? <Content>You got {currentScore}/{quizData.length} correct</Content> : <></>}
+        {!isQuizActive ? <Content>You got {currentScore}/{quizData.length} correct</Content> : <></>}
         
-        {currentScore ? <button onClick={resetQuiz}>Play Again</button> : 
-        <button onClick={handleSubmit}>Check Answers</button>}
+        {!isQuizActive ? <QuizButton onClick={resetQuiz}>Play Again</QuizButton> : 
+        <QuizButton onClick={handleSubmit}>Check Answers</QuizButton>}
       </QuizLayout>
   )
 };

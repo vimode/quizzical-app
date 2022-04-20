@@ -9,9 +9,8 @@ import Quiz from "./components/Quiz"
 
 
 const Wrapper = styled.section`
-  padding: 4em 8em;
-  max-width: 1440px;
-  background: var(--clr - body - bg);
+  padding: 1em;
+  background: var(--clr-body-bg);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -19,6 +18,11 @@ const Wrapper = styled.section`
   place-items: center;
   gap: 1.5em;
   width: 100%;
+
+  @media(min-width:900px ) {
+    padding: 4em 8em;
+    max-width: 1440px;
+  }
 `;
 
 const Title = styled.h1`

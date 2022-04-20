@@ -2,26 +2,21 @@ import React, {useState} from "react";
 
 //packages
 import styled from 'styled-components';
+import {nanoid} from 'nanoid';
 
 //styled components
 const QuestionCard = styled.div `
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin: 1em;
-  gap: 0.5em;
+  margin: 0.5em;
+  gap: 1em;
   position:relative;
   padding: 1em;
 
-  &::after {
-    content: "";
-    position: absolute;
-    min-width: 600px;
-    width: max-content;   
-    height: 1px;
-    background: grey;
-    bottom: 0px;
-    opacity: 0.5;
+  & > p {
+    font-size: 1.2rem;
+    max-width: 70ch;
   }
 `
 
@@ -29,7 +24,6 @@ const AnswerWrapper = styled.div `
   display:flex;
   gap: 1em;
   flex-wrap: wrap;
-  place-items: space-between;
   width: 100%;
   `
 
@@ -41,19 +35,35 @@ const AnswerOptions = styled.div `
 const RadioInput = styled.input.attrs({
   type: "radio"
 })`
+  appearance:none;
 
 `
 
 const RadioLabel = styled.label `
-  border: 1px solid black;
-  padding: 5px 15px;
+  border: 1px solid ${props => props.correctOption ? "transparent" : "var(--clr-button-bg)"};
+  padding: 10px;
   border-radius: 10px;
-  width: max-content;
+  min-width: 200px;
+  max-width: max-content;
   cursor: pointer;
-  background: ${props => props.correctOption ? "yellow" : "transparent"};
+  background: ${props => props.correctOption  ?  "var(--clr-highlight-secondary)" : "transparent"};
+  font-family : var(--ff-secondary);
+  font-weight: var(--fw-med);
+  font-size: 1rem;
+  transition: background 100ms linear;
+  flex-grow: 2;
+  text-align:center;
+  pointer-events: ${props => props.labelStatus && "none"};
+
 
   ${RadioInput}:checked + && {
     background: ${props => props.evalOption ? "var(--clr-highlight-tertiary)": "var(--clr-highlight-secondary)"};
+    border: 1px solid transparent;
+  }
+
+    &:hover,
+    &:focus  {
+    background : var(--clr-highlight-primary);
   }
   
 `
@@ -82,16 +92,17 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
             <RadioInput 
               type="radio" 
               name={QuestionData.id} 
-              id={option} 
+              id={`${QuestionData.id.concat(option)}`} 
               value = {option}
               checked={selectedValue === option }
               onChange={()=> handleChange(event, index, option)}
               disabled = {isQuizActive ? false : true}
             />
             <RadioLabel 
-                htmlFor={option}
+                htmlFor={`${QuestionData.id.concat(option)}`} 
                 evalOption = {!isQuizActive && !isCorrect}
                 correctOption = {!isQuizActive && (option === QuestionData.correct_answer)}
+                labelStatus = {!isQuizActive}
                 >
             {option}</RadioLabel>
         </AnswerOptions>)

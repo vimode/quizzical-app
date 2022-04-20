@@ -17,6 +17,8 @@ export const GlobalStyle = createGlobalStyle`
     --fw-med: 500;
     --fw-semibold: 600;
     --fw-bold: 700;
+
+    --fs-body: 18px;
     
     --clr-body-bg: #F5F7FB;
     --clr-highlight-primary: #D6DBF5;
@@ -34,6 +36,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: var(--clr-body-bg);
     min-height: 100vh;
     min-width: 100vw;
+    font-size: var(--fs-body);
   }
 
   .btn, button, input {
@@ -47,14 +50,15 @@ export const GlobalStyle = createGlobalStyle`
     width: max-content;
     border-radius: 10px;
     background-color: var(--clr-button-bg);
-    border: none;
+    border: 1px solid transparent;
     color: var(--clr-button-text);
-    transition: all linear 300ms;
+    transition: all linear 250ms;
+    font-size: inherit;
   }
 
   #root {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     place-items: center;
     place-content: center;
   }
