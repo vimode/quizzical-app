@@ -50,11 +50,12 @@ const RadioLabel = styled.label `
   border-radius: 10px;
   width: max-content;
   cursor: pointer;
-  background-color: transparent;
+  background: ${props => props.correctOption ? "yellow" : "transparent"};
 
   ${RadioInput}:checked + && {
-    background: var(--clr-highlight-secondary);
+    background: ${props => props.evalOption ? "var(--clr-highlight-tertiary)": "var(--clr-highlight-secondary)"};
   }
+  
 `
 
 function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) { 
@@ -68,15 +69,6 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
     setIsCorrect((prevState) => { return value === QuestionData.correct_answer}) 
     updateSelection(event, isCorrect,  QuestionData.id, index)
   }
-
-  let radioClass; 
-    if(isCorrect) {
-       radioClass = 'itemCorrect'
-    } else {
-     radioClass = 'itemIncorrect'
-    }
-    // console.log(radioClass)
-
 
   return (
     <QuestionCard
@@ -98,7 +90,8 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
             />
             <RadioLabel 
                 htmlFor={option}
-                className ={`${!isQuizActive ? radioClass : ""}`}
+                evalOption = {!isQuizActive && !isCorrect}
+                correctOption = {!isQuizActive && (option === QuestionData.correct_answer)}
                 >
             {option}</RadioLabel>
         </AnswerOptions>)

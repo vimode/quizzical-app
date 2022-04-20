@@ -109,7 +109,7 @@ function App() {
     
     setIsLoading(true)
 
-    const fetchURI = "https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple&encode=base64"
+    const fetchURI = "https://opentdb.com/api.php?amount=5&category=15&difficulty=easy&type=multiple&encode=base64"
     
     const response = await fetch(fetchURI);
     try {
