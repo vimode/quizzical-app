@@ -47,7 +47,7 @@ function Quiz ({quizData,resetStart}) {
   function handleSubmit (event) {
     event.preventDefault();
     answerChecker()
-    setIsQuizActive(true)   
+    setIsQuizActive(false)   
   }
 
   //populate selected answers from radio buttons in any order
@@ -64,7 +64,6 @@ function Quiz ({quizData,resetStart}) {
     event.preventDefault();
     setSelectedAnswers([])
     setCurrentScore()
-    setIsQuizActive(false)
     resetStart()
   }
 

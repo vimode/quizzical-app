@@ -73,7 +73,7 @@ const Loader = styled.div `
 function App() {
 
   // the decoded quiz data
-  const [quizData, setQuizData] = useState('');
+  const [quizData, setQuizData] = useState([]);
   
   // toStart fetching data
   const [quizStart, setQuizStart] = useState(false);

@@ -35,12 +35,13 @@ const AnswerWrapper = styled.div `
 
 const AnswerOptions = styled.div `
   display:flex;
+  gap: 4px;
 `
 
-const RadioInput = styled.input.attrs(props => ({
+const RadioInput = styled.input.attrs({
   type: "radio"
-}))`
-  
+})`
+
 `
 
 const RadioLabel = styled.label `
@@ -51,7 +52,7 @@ const RadioLabel = styled.label `
   cursor: pointer;
   background-color: transparent;
 
-  ${RadioInput}:checked & {
+  ${RadioInput}:checked + && {
     background: var(--clr-highlight-secondary);
   }
 `
@@ -86,10 +87,6 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
         {QuestionData.answer_options.map((option, index) => 
           (<AnswerOptions
             key = {option}>
-              <RadioLabel 
-                htmlFor={option}
-                className ={`${!isQuizActive ? {radioClass} : ""}`}
-                >
             <RadioInput 
               type="radio" 
               name={QuestionData.id} 
@@ -97,7 +94,12 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
               value = {option}
               checked={selectedValue === option }
               onChange={()=> handleChange(event, index, option)}
+              disabled = {isQuizActive ? false : true}
             />
+            <RadioLabel 
+                htmlFor={option}
+                className ={`${!isQuizActive ? radioClass : ""}`}
+                >
             {option}</RadioLabel>
         </AnswerOptions>)
         )}
