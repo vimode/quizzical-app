@@ -6,7 +6,6 @@ export const QuestionCard = styled.div`
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin: 0.5em;
   gap: 1em;
   position:relative;
   padding: 1em;
@@ -22,6 +21,7 @@ export const AnswerWrapper = styled.div`
   gap: 1em;
   flex-wrap: wrap;
   width: 100%;
+  justify-content:space-evenly;
   `
 
 export const AnswerOptions = styled.div`

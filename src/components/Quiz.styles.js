@@ -7,6 +7,7 @@ export const QuizLayout = styled.form`
   place-items: center;
   place-content: center;
   height: 100%;
+  gap: 1.5em;
 `
 
 export const Content = styled.p` 

@@ -12,7 +12,6 @@ function Quiz ({quizData,resetStart}) {
   const [currentScore, setCurrentScore] = useState(); // score
   const [ isQuizActive, setIsQuizActive ] = useState(true);
 
-
   // validate user selected formData entries with quizData.correct_answers and update the score
   function answerChecker() {
     let tempScore = 0;

@@ -35,7 +35,6 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--clr-primary-text);
     background-color: var(--clr-body-bg);
     min-height: 100vh;
-    min-width: 100vw;
     font-size: var(--fs-body);
   }
 
