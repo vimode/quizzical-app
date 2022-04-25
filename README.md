@@ -39,6 +39,7 @@ SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submi
 - [x] Disable options/radio buttons on submit
 - [x] Style radio buttons and conditionally render label colors
 - [] Add category and difficulty tag on Quiz page for each question (must for random)
+- [] Update intro text to accomodate the new random
 
 ### Styling
 

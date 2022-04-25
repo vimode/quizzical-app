@@ -173,7 +173,10 @@ function App() {
 
          </> : <p>Loading Options...</p>}
 
-          <Content>In each quiz you'll be given five random quesitons to answer. Press the button below to play and see how many you can answer correctly! </Content>
+          <Content>
+            In each quiz you'll be given five questions to answers.
+            <br/>
+            Select a category and difficulty level of your choice. Feeling adventourous? Click the button below for a random quiz.</Content>
           <StartButton onClick = {loadQuiz}>Start Quiz</StartButton> </> ) 
           :  isLoading && quizData.length < 4 ? (<Loader/>) 
         : !isLoading && quizData ? (<Quiz quizData = {quizData} resetStart= {resetStart}/>) : <></> }
