@@ -176,7 +176,7 @@ function App() {
           <Content>
             In each quiz you'll be given five questions to answers.
             <br/>
-            Select a category and difficulty level of your choice. Feeling adventourous? Click the button below for a random quiz.</Content>
+            Select a category and difficulty level of your choice or just click start quiz button below for a random quiz.</Content>
           <StartButton onClick = {loadQuiz}>Start Quiz</StartButton> </> ) 
           :  isLoading && quizData.length < 4 ? (<Loader/>) 
         : !isLoading && quizData ? (<Quiz quizData = {quizData} resetStart= {resetStart}/>) : <></> }
