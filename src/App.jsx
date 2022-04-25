@@ -80,7 +80,7 @@ function App() {
     if(fetchURLParameters.selectedCategory && fetchURLParameters.selectedDifficulty) {
       fetchURI = fetchURLParameters.fetchURL
     } else {
-      fetchURI = 'https://opentdb.com/api.php?amount=5&encode=base64'
+      fetchURI = 'https://opentdb.com/api.php?amount=5&type=multiple&encode=base64'
     }
 
     const response = await fetch(fetchURI);
