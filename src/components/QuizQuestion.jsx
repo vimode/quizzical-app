@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 //styled components
- import { QuestionCard, AnswerWrapper, AnswerOptions, RadioInput, RadioLabel} from './QuizQuestion.styles.js';
+ import { QuestionCard, AnswerWrapper, AnswerOptions, RadioInput, RadioLabel,DetailsWrapper, Content, ContentCategory, ContentDifficulty} from './QuizQuestion.styles.js';
 
 function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) { 
 
@@ -19,6 +19,12 @@ function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) {
     <QuestionCard
     key ={QuestionData.id}
     >
+      <DetailsWrapper>
+        <ContentCategory>{QuestionData.category}</ContentCategory>
+        <ContentDifficulty
+          difficulty= {QuestionData.difficulty}
+        >{QuestionData.difficulty.toUpperCase()}</ContentDifficulty>
+      </DetailsWrapper>
         <p>{QuestionData.question}</p>
       <AnswerWrapper>
         {QuestionData.answer_options.map((option, index) => 
