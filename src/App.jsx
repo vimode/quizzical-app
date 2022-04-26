@@ -38,6 +38,9 @@ function reducer(state, action) {
       case 'reset' :
         return {
           ...state,
+          selectedCategory : "",
+          selectedDifficulty: "",
+          fetchURL : `https://opentdb.com/api.php?amount=5&type=multiple&encode=base64`,
           quizStart: false,
         }
     default:
