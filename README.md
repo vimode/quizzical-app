@@ -30,6 +30,8 @@ It was fun to use `useReducer()` hook, was fun to watch chopping down a lot of s
 
 ## TODO
 
+_This list will be removed once everything is checked or project is considered as completed_
+
 ### Basic
 
 - [x] Basic functionalty to fetch encoded data, decode it and save a new state object
@@ -63,8 +65,6 @@ It was fun to use `useReducer()` hook, was fun to watch chopping down a lot of s
 - [ ] Add figma link and/or desktop screenshot
 - [ ] Add favicon
 
-````
-
 ## Installation
 
 Clone the repo
@@ -73,9 +73,9 @@ Clone the repo
 cd quizzical-app
 npm install
 npm run dev
-````
 
 Open http://localhost:3000 to view it in the browser
+```
 
 **Available Scripts**
 
