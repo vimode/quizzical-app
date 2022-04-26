@@ -12,7 +12,7 @@ export const QuestionCard = styled.div`
 
   & > p {
     font-size: 1.2rem;
-    max-width: 70ch;
+    max-width: 80ch;
   }
 `
 
@@ -27,6 +27,7 @@ export const AnswerWrapper = styled.div`
 export const AnswerOptions = styled.div`
   display:flex;
   gap: 4px;
+  place-items:center;
 `
 
 export const RadioInput = styled.input.attrs({
@@ -54,12 +55,34 @@ export const RadioLabel = styled.label`
 
   ${RadioInput}:checked + && {
     background: ${props => props.evalOption ? "var(--clr-highlight-tertiary)" : "var(--clr-highlight-secondary)"};
-    border: 1px solid transparent;
+    border: ${props => props.labelStatus ? "2px solid blue" : "2px solid transparent"};
   }
 
     &:hover,
     &:focus  {
     background : var(--clr-highlight-primary);
   }
-  
 `
+
+export const DetailsWrapper = styled.div`
+  display:flex;
+  gap: 1em;
+`;
+
+export const Content = styled.p`
+  font-family: var(--ff-secondary);
+  font-weight: var(--fw-med);
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 5px;
+`;
+
+
+export const ContentDifficulty = styled(Content)`
+  background-color: ${props => props.difficulty === "easy" ? "gold" : props.difficulty === "medium" ? "limegreen" : "red"};
+  color: ${props => props.difficulty === "hard" ? "white" : 'black'};
+`;
+
+export const ContentCategory = styled(Content)`
+  background-color: PeachPuff;
+  `;
