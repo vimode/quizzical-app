@@ -18,15 +18,15 @@ Objectives of the Project
 
 _readme is currently being used as data/knowledge/resource dump while building the app_
 
-Styled components docs https://styled-components.com/docs/
+This was a fun and challenging app to build. At surface it felt really simple to build. And the structure was very straightforward too. But the app logic was not that simple. Its easy to check user responses as soon as its selected but to delay it to when user submits required a different approach as the user was allowed to change their responses any number of times before submitting.
 
-Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
+I relied heavily on JS objects and object methods for most of the app logic.
 
-selectedIndex - https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedIndex
+This was the first time I tried Styled Components for styling instead of regular CSS. And it was really fun using it especially the flexibility it provides with props, nesting and conditionals. The styled component docs were really helpful to start learning and implement everything in the project. The only thing that wasn't very clear about SC in the docs was the way to create and use GlobalStyles for the project.
 
-SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter // possibly a fix for handling two buttons/two seperate functions in one on onSubmit
+The fetched data from the API had some HTML entities, so I changed the default encoding to Bas64 and used the `atob()` function from the Web API. It isn't recommended to use it in frontend apps and `encoreURIComponent()` is to be used.
 
-useReducer article - https://blog.logrocket.com/react-usereducer-hook-ultimate-guide/
+It was fun to use `useReducer()` hook, was fun to watch chopping down a lot of states and consolidate a lot of logic it in a single function.
 
 ## TODO
 
@@ -94,6 +94,16 @@ npm run preview
 ## Resources
 
 OTDB API - https://opentdb.com/api_config.php
+
+Styled-Components docs https://styled-components.com/docs/
+
+useReducer() - https://reactjs.org/docs/hooks-reference.html#usereducer
+
+Base64 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
+
+encoreURIComponent() - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+
+SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
 
 Nano ID - https://github.com/ai/nanoid
 
