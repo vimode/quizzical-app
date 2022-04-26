@@ -48,7 +48,7 @@ function Quiz ({quizData,resetStart}) {
     event.preventDefault();
     setSelectedAnswers([])
     setCurrentScore()
-    resetStart()
+    resetStart(event)
   }
 
   
@@ -67,7 +67,7 @@ function Quiz ({quizData,resetStart}) {
 
         {!isQuizActive ? <Content>You got {currentScore}/{quizData.length} correct</Content> : <></>}
         
-        {!isQuizActive ? <QuizButton onClick={resetQuiz}>Play Again</QuizButton> : 
+        {!isQuizActive ? <QuizButton name= "reset" onClick={resetQuiz}>Play Again</QuizButton> : 
         <QuizButton onClick={handleSubmit}>Check Answers</QuizButton>}
       </QuizLayout>
   )
