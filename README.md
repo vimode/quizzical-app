@@ -26,6 +26,8 @@ selectedIndex - https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectEleme
 
 SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter // possibly a fix for handling two buttons/two seperate functions in one on onSubmit
 
+useReducer article - https://blog.logrocket.com/react-usereducer-hook-ultimate-guide/
+
 ## TODO
 
 ### Basic
@@ -38,14 +40,14 @@ SubmitEvent - https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submi
 - [x] onSubmit highlight selected option as correct or incorrect accordinglly
 - [x] Disable options/radio buttons on submit
 - [x] Style radio buttons and conditionally render label colors
-- [] Add category and difficulty tag on Quiz page for each question (must for random)
-- [] Update intro text to accomodate the new random
+- [x] Add category and difficulty tag on Quiz page for each question (must for random)
+- [x] Update intro text to accomodate the new random
 
 ### Styling
 
 - [x] Initiate and establish Styled components
 - [ ] Media Queries
-- [ ] Start screen styling
+- [x] Start screen styling
 - [x] Conditional styling of radio buttons
 
 ### Extra
