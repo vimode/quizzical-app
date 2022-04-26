@@ -28,6 +28,7 @@ export const Content = styled.p`
   text-align: center;
   font-family: var(--ff-secondary);
   font-weight: var(--fw-reg);
+  line-height: 1.5rem;
 `;
 
 export const StartButton = styled.button`
@@ -63,4 +64,28 @@ export const Loader = styled.div`
       border-color: var(--clr-highlight-secondary) transparent var(--clr-highlight-secondary) transparent;
       animation: ${rotate} 1.5s linear infinite;
     }
+`;
+
+export const DropdownWrapper = styled.section`
+    display:flex;
+    flex-direction: column;
+    gap: 1em;
+`;
+
+export const SelectLabel = styled.label`
+  
+
+`;
+
+export const SelectOptions = styled.select`
+    font-family: var(--ff-secondary);
+    font-weight: var(--fw-reg);
+    font-size: 0.9rem;
+    background-color: var(--clr-white);
+    border: thin solid var(--clr-button-bg);
+    border-radius: 5px;
+    display:inline-block;
+    line-height: 1em;
+    padding: 10px;
+    width:40ch;
 `;
