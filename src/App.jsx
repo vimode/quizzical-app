@@ -4,18 +4,52 @@ import React, { useState, useEffect, useReducer } from 'react'
 import { nanoid } from 'nanoid';
 
 //Styles
-import { Wrapper, Title, Content, StartButton, Loader } from './App.styles';
+import { Wrapper, Title, Content, StartButton, Loader, DropdownWrapper, SelectLabel, SelectOptions } from './App.styles';
 
 // Components
-import Quiz from "./components/Quiz"
+import Quiz from "./components/Quiz";
+
+
+  // intial reducer statet (bad variable name for now)
+  const fetchURLParameters = {
+    selectedCategory: "",
+    selectedDifficulty: "",
+    fetchURL : `https://opentdb.com/api.php?amount=5&type=multiple&encode=base64`,
+    quizStart : false
+  };
+
+  
+// reducer function which updates categories + starts/end/rest quiz 
+function reducer(state, action) {
+  switch(action.type) {
+    case 'category' : 
+      return {...state,
+      selectedCategory : action.payload,
+      fetchURL : `https://opentdb.com/api.php?amount=5&category=${action.payload}&difficulty=${state.selectedDifficulty}&type=multiple&encode=base64`};
+    case 'difficulty' :
+      return {...state,
+      selectedDifficulty :action.payload,
+      fetchURL : `https://opentdb.com/api.php?amount=5&category=${state.selectedCategory}&difficulty=${action.payload}&type=multiple&encode=base64`};
+    case 'start' :
+      return {
+        ...state,
+        quizStart: true,
+      }
+      case 'reset' :
+        return {
+          ...state,
+          quizStart: false,
+        }
+    default:
+      throw new Error();
+  }
+}
+
 
 function App() {
 
   // the decoded quiz data
   const [quizData, setQuizData] = useState([]);
-  
-  // toStart fetching data
-  const [quizStart, setQuizStart] = useState(false);
   
   // A loading icon while data is being fetched.
   const [isLoading, setIsLoading] = useState(false)
@@ -23,15 +57,12 @@ function App() {
   // categories
   const [quizCategories, setQuizCategories] = useState([]);
 
-  // intial URL parameters
-  const fetchURLParameters = {
-    selectedCategory: "",
-    selectedDifficulty: "",
-    fetchURL : `https://opentdb.com/api.php?amount=5&encode=base64`
-  };
-
-  //udpating URL parameters
+   //udpating URL parameters
   const [state, dispatch] = useReducer(reducer, fetchURLParameters )
+
+   // statesss that useReducer handles
+  const {selectedCategory,  selectedDifficulty,  fetchURL,  quizStart } = state;
+  
 
   // fetch quizCategories
   useEffect(()=> {
@@ -46,30 +77,19 @@ function App() {
   }, [])
 
 
-  //handle URL paramter changes
+  //dispatch action based on the event name
   const handleParameterUpdate = (event) => {  
   const { value, name } = event.target;
     if (name === "category") {
       return ( dispatch ( {type : 'category', payload : value}));
+    } else if (name === "start") {
+      return (dispatch ({type : 'start'}))
+    } else if (name === "reset" ) {
+      return (dispatch ({type: 'reset'}))
     }
     dispatch ( {type: 'difficulty', payload : value});
   }
 
-// reducer function
-  function reducer(state, action) {
-    switch(action.type) {
-      case 'category' : 
-        return {...state,
-        selectedCategory : action.payload,
-        fetchURL : `https://opentdb.com/api.php?amount=5&category=${action.payload}&difficulty=${state.selectedDifficulty}&type=multiple&encode=base64`};
-      case 'difficulty' :
-        return {...state,
-        selectedDifficulty :action.payload,
-        fetchURL : `https://opentdb.com/api.php?amount=5&category=${state.selectedCategory}&difficulty=${action.payload}&type=multiple&encode=base64`};
-      default:
-        throw new Error();
-    }
-  }
   
   // fetch base64 encoded data from API
   async function fetchQuizData () {
@@ -77,8 +97,8 @@ function App() {
     setIsLoading(true)
 
     let fetchURI = ""
-    if(fetchURLParameters.selectedCategory && fetchURLParameters.selectedDifficulty) {
-      fetchURI = fetchURLParameters.fetchURL
+    if(state.selectedCategory && state.selectedDifficulty) {
+      fetchURI = state.fetchURL
     } else {
       fetchURI = 'https://opentdb.com/api.php?amount=5&type=multiple&encode=base64'
     }
@@ -86,7 +106,6 @@ function App() {
     const response = await fetch(fetchURI);
     try {
       const fetchedData = await response.json()
-      console.log(fetchedData.results)
       dataSplit(fetchedData.results)
     } catch(e) {
       console.log(`Error ${response.status}`)
@@ -118,22 +137,18 @@ function App() {
     setIsLoading(false)
   }
 
-  // start quiz
-  function loadQuiz () {
-    setQuizStart(true)
-  }
 
     // triggers when user clicks to start quiz
   useEffect(()=> {
-    if(quizStart) {
+    if(state.quizStart) {
       fetchQuizData()
     }
-  }, [quizStart])
+  }, [state.quizStart])
 
 
   // reset quiz
-  function resetStart() {
-    setQuizStart(false)
+  function resetStart(event) {
+    handleParameterUpdate(event)
     setQuizData('')
   }
 
@@ -141,14 +156,19 @@ function App() {
   return (
     <Wrapper>
       
-      {!isLoading && !quizStart  ? 
+      {!isLoading && !state.quizStart  ? 
         ( <>
           <Title>Quizzical App</Title>
 
+          <Content>
+            In each quiz you'll be given five questions to answers.
+            <br/>
+            Select a category and difficulty level of your choice or just click the button below for a random quiz.</Content>
+
          {quizCategories.length > 1 ? 
-         <>
-          <label htmlFor='category_select'>Choose a Category: 
-          <select name="category" id="category_select" onChange={(event)=> handleParameterUpdate(event)}>
+         <DropdownWrapper>
+          <SelectLabel htmlFor='category_select'>Category: 
+          <SelectOptions name="category" id="category_select" onChange={(event)=> handleParameterUpdate(event)}>
             <option value ="">Select a Category</option>
             {quizCategories.map((categoryName) => 
              <option 
@@ -157,27 +177,23 @@ function App() {
               {categoryName.name}
             </option>
           )} 
-          </select>
-          </label>
+          </SelectOptions>
+          </SelectLabel>
 
-          <label htmlFor = 'difficulty_select'
+          <SelectLabel htmlFor = 'difficulty_select'
           onChange={(event)=> handleParameterUpdate(event)}>
-            Choose a difficulty: 
-          <select name = "difficulty" id="difficulty_select">
-            <option value="">Select Quiz Difficulty</option>
+            Difficulty: 
+          <SelectOptions name = "difficulty" id="difficulty_select">
+            <option value="">Select Difficulty</option>
             <option value ="easy">Easy</option>
             <option value ="medium">Medium</option>
             <option value ="hard">Hard</option>
-          </select>
-          </label>
+          </SelectOptions>
+          </SelectLabel>
 
-         </> : <p>Loading Options...</p>}
+         </DropdownWrapper> : <p>Loading Options...</p>}
 
-          <Content>
-            In each quiz you'll be given five questions to answers.
-            <br/>
-            Select a category and difficulty level of your choice or just click start quiz button below for a random quiz.</Content>
-          <StartButton onClick = {loadQuiz}>Start Quiz</StartButton> </> ) 
+          <StartButton name="start" onClick = {(event)=> handleParameterUpdate(event)}>Start Quiz</StartButton> </> ) 
           :  isLoading && quizData.length < 4 ? (<Loader/>) 
         : !isLoading && quizData ? (<Quiz quizData = {quizData} resetStart= {resetStart}/>) : <></> }
     </Wrapper>
