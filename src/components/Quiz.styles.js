@@ -1,4 +1,3 @@
-//packages
 import styled from 'styled-components';
 
 export const QuizLayout = styled.form`

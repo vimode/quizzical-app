@@ -61,5 +61,4 @@ export const GlobalStyle = createGlobalStyle`
     place-items: center;
     place-content: center;
   }
-
   `

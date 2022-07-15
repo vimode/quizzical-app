@@ -1,23 +1,15 @@
 import React, { useState, useEffect, useReducer } from 'react'
-
-// packages
 import { nanoid } from 'nanoid';
-
-//Styles
 import { Wrapper, Title, Content, StartButton, Loader, DropdownWrapper, SelectLabel, SelectOptions } from './App.styles';
-
-// Components
 import Quiz from "./components/Quiz";
 
-
-  // intial reducer statet (bad variable name for now)
+  // intial reducer state
   const fetchURLParameters = {
     selectedCategory: "",
     selectedDifficulty: "",
     fetchURL : `https://opentdb.com/api.php?amount=5&type=multiple&encode=base64`,
     quizStart : false
   };
-
   
 // reducer function which updates categories + starts/end/rest quiz 
 function reducer(state, action) {
@@ -50,24 +42,12 @@ function reducer(state, action) {
 
 
 function App() {
-
-  // the decoded quiz data
   const [quizData, setQuizData] = useState([]);
-  
-  // A loading icon while data is being fetched.
   const [isLoading, setIsLoading] = useState(false)
-
-  // categories
   const [quizCategories, setQuizCategories] = useState([]);
-
-   //udpating URL parameters
   const [state, dispatch] = useReducer(reducer, fetchURLParameters )
-
-   // statesss that useReducer handles
   const {selectedCategory,  selectedDifficulty,  fetchURL,  quizStart } = state;
   
-
-  // fetch quizCategories
   useEffect(()=> {
     const fetchCategories = async () => {
       const categoriesData = await fetch('https://opentdb.com/api_category.php');
@@ -93,12 +73,8 @@ function App() {
     dispatch ( {type: 'difficulty', payload : value});
   }
 
-  
-  // fetch base64 encoded data from API
   async function fetchQuizData () {
-    
     setIsLoading(true)
-
     let fetchURI = ""
     if(state.selectedCategory && state.selectedDifficulty) {
       fetchURI = state.fetchURL
@@ -115,15 +91,10 @@ function App() {
     }
   }
 
-  // split base64 encoded data to convert to utf-8 and store in a state variable.
   function dataSplit(encodedData) {
-    
     let decodedData = []
-    
     encodedData.map((questionObj, index) => {
-      
       let combined_options = [...questionObj.incorrect_answers, questionObj.correct_answer]
-      
       decodedData.push({
         id : nanoid(),
         question : atob(questionObj.question),
@@ -140,16 +111,12 @@ function App() {
     setIsLoading(false)
   }
 
-
-    // triggers when user clicks to start quiz
   useEffect(()=> {
     if(state.quizStart) {
       fetchQuizData()
     }
   }, [state.quizStart])
 
-
-  // reset quiz
   function resetStart(event) {
     handleParameterUpdate(event)
     setQuizData('')

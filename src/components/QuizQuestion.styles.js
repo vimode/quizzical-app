@@ -1,6 +1,4 @@
-//packages
 import styled from 'styled-components';
-
 
 export const QuestionCard = styled.div`
   display: flex;

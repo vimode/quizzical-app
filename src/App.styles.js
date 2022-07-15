@@ -1,4 +1,3 @@
-//packages
 import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.section`
@@ -73,7 +72,6 @@ export const DropdownWrapper = styled.section`
 `;
 
 export const SelectLabel = styled.label`
-  
 
 `;
 

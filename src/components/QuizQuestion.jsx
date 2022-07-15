@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-
-//styled components
  import { QuestionCard, AnswerWrapper, AnswerOptions, RadioInput, RadioLabel,DetailsWrapper, Content, ContentCategory, ContentDifficulty} from './QuizQuestion.styles.js';
 
 function QuizQuestion ({QuestionData, updateSelection, isQuizActive}) { 
