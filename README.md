@@ -1,6 +1,6 @@
 # Quizzical App
 
-This is the solo project for Scrimba Module 11.4
+This is the solo project for Scrimba Module 12.4
 
 ## Overview
 
